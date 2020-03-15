@@ -52,8 +52,8 @@ public class TarefaMB{
 	
 	public String excluir(Tarefa tarefa) {
 		new TarefaDao().excluir(tarefa);
-		FacesContext.getCurrentInstance().addMessage(null, 
-				new FacesMessage("Evento Excluido"));
+		/*FacesContext.getCurrentInstance().addMessage(null, 
+				new FacesMessage("Evento Excluido"));*/
 		tarefas = new TarefaDao().listarTodos();
 		return "lista?faces-redirect=true";
 		

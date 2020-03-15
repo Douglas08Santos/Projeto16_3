@@ -28,6 +28,7 @@ public class TarefaDao {
 		EntityManager em = HibernateUtil.getEntityManager();	
 		
 		em.getTransaction().begin();
+		tarefa = em.merge(tarefa);
 		em.remove(tarefa);
 		em.getTransaction().commit();
 		em.close();
