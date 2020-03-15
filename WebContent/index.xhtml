@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- 
+	Melhorias:
+	
+	adicionar um selectOneMenu para dividir as tarefas em
+	grupos criado pelo usuario
+
+ -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	>
+
+	<h:head>
+		<title>ESIG - TODO List</title>
+	</h:head>
+	<h:body>		
+		<h:form title="TODO" id="FormularioTODO" style="min-width: 407px; max-width:30%;">
+			<p:messages></p:messages>
+			<p:panel header="O que você está pensando em fazer?" >
+				<p:panelGrid columns="2" style="min-width: 350px; max-width:90%;">
+					<h:outputLabel value = "Tarefa: " />	
+					<p:inputText id="input-nome" value="#{tarefaMB.tarefa.nome}" 
+						required="true" requiredMessage="Deve informar o titulo da tarefa"/>
+					<h:outputLabel value = "Descrição: "/>
+					<p:inputTextarea id="input-descr" value="#{tarefaMB.tarefa.descricao}"
+						cols="21" rows="3"/>
+					<p:outputLabel value="Data: " />
+    				<p:calendar id="input-data" value="#{tarefaMB.tarefa.data}" 
+    						pattern="dd/MM/yyyy" mindate="#{tarefaMB.dataAtual}"/> 
+    				<h:outputLabel value = "Importante: "/>
+    				<p:selectBooleanCheckbox valid="checkbox" itemLabel="(TODO:Estrela)" />
+				</p:panelGrid>
+				<br/>
+				<p:commandButton icon="ui-icon-plus" action="#{tarefaMB.adicionar()}" update="@form"/>							
+			</p:panel>			
+		</h:form>			
+	</h:body>
+</html>

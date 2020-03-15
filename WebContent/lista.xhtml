@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	>
+
+	<h:head>
+		<title>Lista de tarefas - TODO List</title>
+	</h:head>
+	<h:body>	            
+	   	<p:panel header="Cadastrados">
+	        <p:dataTable value="#{tabelaBean.tarefas}" var="tarefa">
+				<p:column headerText="Nome">
+					<h:outputText value="#{tarefa.nome}"/>
+				</p:column>
+				<p:column headerText="Data">
+					<h:outputText value="#{tarefa.data}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</p:column>						
+				<p:column headerText="Feito">
+					<p:selectBooleanCheckbox value="#{tarefa.finalizado}"/>
+				</p:column>	
+				<p:column headerText="Prioridade">
+					<p:selectBooleanCheckbox value="#{tarefa.prioridade}"/>
+				</p:column>			
+			</p:dataTable>			
+		</p:panel>			
+	</h:body>
+</html>
+ 
