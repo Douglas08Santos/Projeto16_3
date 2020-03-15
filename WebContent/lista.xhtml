@@ -12,22 +12,43 @@
 	</h:head>
 	<h:body>	            
 	   	<p:panel header="Cadastrados">
-	        <p:dataTable value="#{tabelaBean.tarefas}" var="tarefa">
-				<p:column headerText="Nome">
-					<h:outputText value="#{tarefa.nome}"/>
-				</p:column>
-				<p:column headerText="Data">
-					<h:outputText value="#{tarefa.data}">
-						<f:convertDateTime pattern="dd/MM/yyyy"/>
-					</h:outputText>
-				</p:column>						
-				<p:column headerText="Feito">
-					<p:selectBooleanCheckbox value="#{tarefa.finalizado}"/>
-				</p:column>	
-				<p:column headerText="Prioridade">
-					<p:selectBooleanCheckbox value="#{tarefa.prioridade}"/>
-				</p:column>			
-			</p:dataTable>			
+	   		<h:form>
+	   			<p:messages/>
+		        <p:dataTable value="#{tarefaMB.tarefas}" var="tar">		        
+		        	<p:column width="25" >
+		        		<f:facet name="header" align="center">
+		        			<h:graphicImage url="https://img.icons8.com/color/48/000000/ok--v1.png" width="20px"/>
+		        		</f:facet>
+		        		
+						<p:selectBooleanCheckbox value="#{tar.finalizado}">
+							<p:ajax listener="#{tarefaMB.refreshItem(tar)}"/>
+						</p:selectBooleanCheckbox> 
+					</p:column>	
+					<p:column width="25">
+						<f:facet name="header" align="center">
+		        			<h:graphicImage url="https://image.flaticon.com/icons/svg/1828/1828884.svg" width="15px"/>
+		        		</f:facet>
+						<p:selectBooleanCheckbox value="#{tar.prioridade}">
+							<p:ajax listener="#{tarefaMB.refreshItem(tar)}"/>
+						</p:selectBooleanCheckbox> 								
+					</p:column>
+					<p:column headerText="Nome">
+						<h:outputText value="#{tar.nome}"/>
+					</p:column>
+					<p:column headerText="Data">
+						<h:outputText value="#{tar.data}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>
+					</p:column>						
+					
+					<p:column style="text-align:center" width="100">
+						<p:commandButton icon="ui-icon-pencil" action="#{tarefaMB.editar(tar)}"/>
+						<h:outputText value="    "/>
+						<p:commandButton icon="ui-icon-trash" action="#{tarefaMB.excluir(tar)}" 
+							update="@form"/>
+					</p:column>			
+				</p:dataTable>
+			</h:form>			
 		</p:panel>			
 	</h:body>
 </html>

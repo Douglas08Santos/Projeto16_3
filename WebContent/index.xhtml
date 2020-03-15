@@ -29,13 +29,16 @@
 						cols="21" rows="3"/>
 					<p:outputLabel value="Data: " />
     				<p:calendar id="input-data" value="#{tarefaMB.tarefa.data}" 
-    						pattern="dd/MM/yyyy" mindate="#{tarefaMB.dataAtual}"/> 
+    					pattern="dd/MM/yyyy" mindate="#{tarefaMB.dataAtual}"/> 
     				<h:outputLabel value = "Importante: "/>
-    				<p:selectBooleanCheckbox valid="checkbox" itemLabel="(TODO:Estrela)" />
+    				<p:selectBooleanCheckbox valid="checkbox" itemLabel="(TODO:Estrela)" 
+    					value="#{tarefaMB.tarefa.prioridade}"/>
 				</p:panelGrid>
 				<br/>
-				<p:commandButton icon="ui-icon-plus" action="#{tarefaMB.adicionar()}" update="@form"/>							
+				<p:commandButton icon="ui-icon-plus" action="#{tarefaMB.adicionar}" update="@form"/>							
 			</p:panel>			
-		</h:form>			
+		</h:form>
+		
+					
 	</h:body>
 </html>
