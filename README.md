@@ -34,5 +34,5 @@ Tarefas Realizadas
 
 Autoria: Douglas Alexandre dos Santos 
 	Email: <santosdouglas0808@gmail.com>
-	GitHub: <Douglas08Santos> 
+	GitHub: Douglas08Santos 
 
