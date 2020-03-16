@@ -13,7 +13,6 @@ public class Tarefa {
 	@GeneratedValue
 	private int id;
 	private String nome;
-	private String descricao;
 	private Date data;
 	private Boolean finalizado = false;
 	private Boolean prioridade = false;
@@ -30,12 +29,6 @@ public class Tarefa {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	public String getDescricao() {
-		return descricao;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
 	}
 	public Date getData() {
 		return data;

@@ -6,6 +6,9 @@ import javax.persistence.EntityManager;
 
 import esig.selecao.modelo.Tarefa;
 
+/*
+ * Classe responsavel pro fazer as alterações no banco de dados
+ */
 public class TarefaDao {
 	
 	public void adicionar(Tarefa tarefa) {

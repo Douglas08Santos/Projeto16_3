@@ -22,26 +22,26 @@ public class TarefaMB{
 	private Tarefa tarefa;// = new Tarefa();
 	private List<Tarefa> tarefas = new ArrayList<Tarefa>();
 	
+	/*
+	 * Construtor
+	 */
 	public TarefaMB() {
 		tarefas = new TarefaDao().listarTodos();
 		tarefa = new Tarefa();
 	}
 	
-	/*
-	 * CRUD
-	 */
+	//CREATE
 	public String adicionar() {	
 		new TarefaDao().adicionar(tarefa);
 		tarefas = new TarefaDao().listarTodos();
 		tarefa = new Tarefa();
 		
-		FacesContext.getCurrentInstance().addMessage("", 
-				new FacesMessage("Salvo"));
-		return "lista?faces-redirect=true";
+		return "index?faces-redirect=true";
 			
 	}
 	
-	public void refreshItem(Tarefa tarefa) {
+	//UPDATE
+	public void atualizarItem(Tarefa tarefa) {
 		new TarefaDao().adicionar(tarefa);
 	}
 	
@@ -50,19 +50,25 @@ public class TarefaMB{
 		return "index?faces-redirect=true";
 	}
 	
+	//DELETE
 	public String excluir(Tarefa tarefa) {
 		new TarefaDao().excluir(tarefa);
-		/*FacesContext.getCurrentInstance().addMessage(null, 
-				new FacesMessage("Evento Excluido"));*/
 		tarefas = new TarefaDao().listarTodos();
-		return "lista?faces-redirect=true";
+		return "index?faces-redirect=true";
 		
 	}
-		
+	/*
+	 * Utilizida para determinar o dia atual, para que o
+	 * usuario não adicione uma data anterior a data atual	
+	 */
 	public String getDataAtual() {
 		return new SimpleDateFormat("dd/MM/yyyy")
 				.format(new Date());
 	}
+	
+	/*
+	 * GETTERS E SETTERS
+	 */
 	public Tarefa getTarefa() {
 		return tarefa;
 	}

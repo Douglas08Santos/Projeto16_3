@@ -2,8 +2,11 @@
 <!-- 
 	Melhorias:
 	
-	adicionar um selectOneMenu para dividir as tarefas em
+	- adicionar um selectOneMenu para dividir as tarefas em
 	grupos criado pelo usuario
+	- Criar usuario para usar a lista
+		* Lista Ana
+		* Lista Maria
 
  -->
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -14,30 +17,71 @@
 	>
 
 	<h:head>
-		<title>ESIG - TODO List</title>
+		<title>ESIG List</title>
 	</h:head>
-	<h:body>		
-		<h:form title="TODO" id="FormularioTODO" style="min-width: 407px; max-width:30%;">
-			<p:messages></p:messages>
+	<h:body>	
+		
+		<h:form title="TODO" id="Formulario" style="min-width: 407px; max-width:30%;">
+			<p:messages/>
 			<p:panel header="O que você está pensando em fazer?" >
 				<p:panelGrid columns="2" style="min-width: 350px; max-width:90%;">
 					<h:outputLabel value = "Tarefa: " />	
 					<p:inputText id="input-nome" value="#{tarefaMB.tarefa.nome}" 
-						required="true" requiredMessage="Deve informar o titulo da tarefa"/>
-					<h:outputLabel value = "Descrição: "/>
-					<p:inputTextarea id="input-descr" value="#{tarefaMB.tarefa.descricao}"
-						cols="21" rows="3"/>
+						required="true" requiredMessage="Deve informar o titulo da tarefa">
+						<f:validateLength minimum="3" maximum="30"/>	
+					</p:inputText>
 					<p:outputLabel value="Data: " />
     				<p:calendar id="input-data" value="#{tarefaMB.tarefa.data}" 
     					pattern="dd/MM/yyyy" mindate="#{tarefaMB.dataAtual}"/> 
-    				<h:outputLabel value = "Importante: "/>
-    				<p:selectBooleanCheckbox valid="checkbox" itemLabel="(TODO:Estrela)" 
-    					value="#{tarefaMB.tarefa.prioridade}"/>
 				</p:panelGrid>
 				<br/>
 				<p:commandButton icon="ui-icon-plus" action="#{tarefaMB.adicionar}" update="@form"/>							
 			</p:panel>			
 		</h:form>
+		<br/>
+		
+		<p:panel header="Cadastrados" style="width:70%">
+	   		<h:form>
+		        <p:dataTable value="#{tarefaMB.tarefas}" var="tar" style="width:100%">
+		        	<!-- Coluna de finalizados -->
+		        	<p:column width="100" sortBy="#{tar.finalizado}" style="text-align:center" footerText="Finalizados">
+						<f:facet name="header" style="text-align:center">
+		        			<h:graphicImage url="https://img.icons8.com/color/48/000000/ok--v1.png" width="15px"/>
+		        		</f:facet>
+						<p:selectBooleanCheckbox value="#{tar.finalizado}">
+							<p:ajax listener="#{tarefaMB.atualizarItem(tar)}"/>
+						</p:selectBooleanCheckbox> 								
+					</p:column>
+					<!-- Coluna de prioridade -->
+					<p:column width="100" sortBy="#{tar.prioridade}" style="text-align:center" footerText="Prioridade">
+						<f:facet name="header" style="text-align:center">
+		        			<h:graphicImage url="https://image.flaticon.com/icons/svg/1828/1828884.svg" width="15px"/>
+		        		</f:facet>
+						<p:selectBooleanCheckbox value="#{tar.prioridade}">
+							<p:ajax listener="#{tarefaMB.atualizarItem(tar)}"/>
+						</p:selectBooleanCheckbox> 								
+					</p:column>
+					<!-- Coluna dos nomes/titulo -->
+					<p:column headerText="Nome" sortBy="#{tar.nome}">
+						<h:outputText value="#{tar.nome}" rendered="true"/>
+					</p:column>
+					<!-- Coluna das datas -->
+					<p:column headerText="Data" sortBy="#{tar.data.time}">
+						<h:outputText value="#{tar.data}"  width="100px">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>
+					</p:column>						
+					<!-- Coluna das opções -->
+					<p:column style="text-align:center" width="100">
+						<p:commandButton icon="ui-icon-pencil" action="#{tarefaMB.editar(tar)}"/>
+						<h:outputText value="    "/>
+						<p:commandButton icon="ui-icon-trash" action="#{tarefaMB.excluir(tar)}" 
+							update="@form"/>
+					</p:column>
+								
+				</p:dataTable>
+			</h:form>			
+		</p:panel>			
 		
 					
 	</h:body>
